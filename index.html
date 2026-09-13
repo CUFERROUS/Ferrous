@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferrous</title>
+<style>
+  :root {
+    --ink: #F5E9DA;
+    --ink-soft: #E0C9AE;
+    --copper: #F0A868;
+    --rust: #D9782A;
+    --line: rgba(255,255,255,0.22);
+  }
+  * { box-sizing: border-box; }
+  html { background-color: #140b06; }
+  body {
+    margin: 0;
+    background-image: url('ferrous-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: top center;
+    background-color: #140b06;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 2.75rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+    margin: 0 0 0.4rem;
+  }
+  .underline { width: 140px; height: 3px; background: var(--rust); margin: 0.6rem 0 3rem; }
+  h2.section-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    margin: 0 0 0.5rem;
+  }
+  .index { border-top: 1px solid var(--line); }
+  .entry {
+    display: block;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+  }
+  .entry:hover .entry-name { color: var(--copper); }
+  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .entry-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .entry-arrow {
+    color: var(--copper);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .entry-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .oxidized { margin-top: 5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+  .oxidized p {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    margin: 0;
+    max-width: 40ch;
+  }
+  footer {
+    margin-top: 3rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  footer a { color: var(--copper); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Ferrous</h1>
+    <div class="underline"></div>
+
+    <a href="journal.html" style="color: var(--copper); text-decoration: none; font-size: 0.95rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); display: inline-block; margin-bottom: 3rem;">Read the journal &rarr;</a>
+
+    <h2 class="section-label">Projects</h2>
+    <div class="index">
+
+      <a class="entry" href="https://github.com/CUFERROUS/emdexium">
+        <div class="entry-row">
+          <span class="entry-name">Emdexium</span>
+          <span class="entry-arrow">View repo</span>
+        </div>
+        <p class="entry-desc">Professional cyber deck in development.</p>
+      </a>
+
+      <a class="entry" href="https://github.com/CUFERROUS/anon">
+        <div class="entry-row">
+          <span class="entry-name">ANON</span>
+          <span class="entry-arrow">View repo</span>
+        </div>
+        <p class="entry-desc">A game. Development has currently stopped.</p>
+      </a>
+
+      <a class="entry" href="https://github.com/CUFERROUS/unfounded">
+        <div class="entry-row">
+          <span class="entry-name">unfounded</span>
+          <span class="entry-arrow">View repo</span>
+        </div>
+        <p class="entry-desc">What did you expect to see here?</p>
+      </a>
+
+    </div>
+
+    <div class="oxidized">
+      <p>a binder of ferrous, every project all linked here!</p>
+    </div>
+
+    <footer>
+      Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
+    </footer>
+  </div>
+</body>
+</html>
