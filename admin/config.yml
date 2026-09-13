@@ -1,0 +1,50 @@
+backend:
+  name: github
+  repo: CUFERROUS/Ferrous
+  branch: main
+
+media_folder: "media"
+public_folder: "/media"
+
+collections:
+  - name: "journal"
+    label: "Journal"
+    files:
+      - name: "entries"
+        label: "Journal entries"
+        file: "data/journal.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Date", name: "date", widget: "string", hint: "e.g. Sep 2026" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Link", name: "link", widget: "string", default: "#", required: false }
+            ]}
+
+  - name: "tutorials"
+    label: "Tutorials"
+    files:
+      - name: "entries"
+        label: "Tutorial entries"
+        file: "data/tutorials.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Date", name: "date", widget: "string", hint: "e.g. Sep 2026" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Link", name: "link", widget: "string", default: "#", required: false }
+            ]}
+
+  - name: "notes"
+    label: "Notes"
+    files:
+      - name: "entries"
+        label: "Note entries"
+        file: "data/notes.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Date", name: "date", widget: "string", hint: "e.g. Sep 2026" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Link", name: "link", widget: "string", default: "#", required: false }
+            ]}
