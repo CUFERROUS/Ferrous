@@ -35,6 +35,18 @@ collections:
               { label: "Link", name: "link", widget: "string", default: "#", required: false }
             ]}
 
+  - name: "links"
+    label: "Links"
+    files:
+      - name: "entries"
+        label: "Contact & social links"
+        file: "data/links.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Label", name: "label", widget: "string", hint: "e.g. GitHub, Twitter" },
+              { label: "URL", name: "url", widget: "string" }
+            ]}
+
   - name: "notes"
     label: "Notes"
     files:
