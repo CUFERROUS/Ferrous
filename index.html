@@ -12,8 +12,13 @@
     --rust: #D9782A;
     --line: rgba(255,255,255,0.22);
   }
+
   * { box-sizing: border-box; }
-  html { background-color: #140b06; }
+
+  html {
+    background-color: #140b06;
+  }
+
   body {
     margin: 0;
     background-image: url('ferrous-bg.jpg');
@@ -26,7 +31,13 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+  }
+
   h1 {
     font-family: Georgia, "Iowan Old Style", serif;
     font-size: 2.75rem;
@@ -35,7 +46,14 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.55);
     margin: 0 0 0.4rem;
   }
-  .underline { width: 140px; height: 3px; background: var(--rust); margin: 0.6rem 0 3rem; }
+
+  .underline {
+    width: 140px;
+    height: 3px;
+    background: var(--rust);
+    margin: 0.6rem 0 3rem;
+  }
+
   h2.section-label {
     font-size: 0.95rem;
     font-weight: 500;
@@ -43,7 +61,11 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     margin: 0 0 0.5rem;
   }
-  .index { border-top: 1px solid var(--line); }
+
+  .index {
+    border-top: 1px solid var(--line);
+  }
+
   .entry {
     display: block;
     padding: 1.1rem 0;
@@ -51,27 +73,45 @@
     text-decoration: none;
     color: inherit;
   }
-  .entry:hover .entry-name { color: var(--copper); }
-  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+
+  .entry:hover .entry-name {
+    color: var(--copper);
+  }
+
+  .entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
   .entry-name {
     font-size: 1.05rem;
     font-weight: 500;
     color: var(--ink);
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .entry-arrow {
     color: var(--copper);
     font-size: 0.95rem;
     flex-shrink: 0;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .entry-desc {
     color: var(--ink-soft);
     font-size: 0.92rem;
     margin-top: 0.2rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
-  .oxidized { margin-top: 5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+
+  .oxidized {
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
   .oxidized p {
     font-family: Georgia, "Iowan Old Style", serif;
     font-size: 1.3rem;
@@ -80,13 +120,44 @@
     margin: 0;
     max-width: 40ch;
   }
+
   footer {
     margin-top: 3rem;
     color: var(--ink-soft);
     font-size: 0.85rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   footer a { color: var(--copper); }
+
+  .links-row {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .links-row a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .links-row a:hover { color: var(--copper); }
+
+  .link-sep {
+    color: var(--ink-soft);
+    margin: 0 0.6rem;
+    opacity: 0.5;
+  }
+
+  .stats-row {
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
 </style>
 </head>
 <body>
@@ -129,9 +200,39 @@
       <p>a binder of ferrous, every project all linked here!</p>
     </div>
 
+    <div class="links-row" id="links-row"></div>
+
+    <div class="stats-row">
+      <span id="project-count-stat"></span>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=cuferrous.ferrous&text=visitors&color=8a4a22&left_color=140b06" alt="visitor count" style="vertical-align: middle; border-radius: 4px;">
+    </div>
+
     <footer>
       Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
     </footer>
   </div>
+
+  <script>
+    async function loadLinks() {
+      try {
+        const res = await fetch('data/links.json?t=' + Date.now());
+        const json = await res.json();
+        const row = document.getElementById('links-row');
+        row.innerHTML = json.entries.map(l =>
+          `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+        ).join('<span class="link-sep">·</span>');
+      } catch (err) {
+        console.error('Could not load links', err);
+      }
+    }
+
+    function setProjectCount() {
+      const count = document.querySelectorAll('.index .entry').length;
+      document.getElementById('project-count-stat').textContent = count + ' project' + (count === 1 ? '' : 's') + ' tracked';
+    }
+
+    loadLinks();
+    setProjectCount();
+  </script>
 </body>
 </html>
