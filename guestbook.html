@@ -27,6 +27,18 @@
     min-height: 100vh;
   }
   .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+  .site-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .site-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .site-nav a:hover, .site-nav a.active { color: var(--copper); }
   .back-link {
     display: inline-block;
     color: var(--ink-soft);
@@ -150,7 +162,12 @@
 </head>
 <body>
   <div class="wrap">
-    <a class="back-link" href="index.html">&larr; Back to Ferrous</a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="journal.html">Journal</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="guestbook.html" class="active">Guestbook</a>
+    </nav>
 
     <h1>Guestbook</h1>
     <div class="underline"></div>
