@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Ferrous Journal</title>
+    <link>https://cuferrous.github.io/Ferrous/journal.html</link>
+    <description>Journal entries from Ferrous</description>
+
+    <item>
+      <title>Starting Ferrous</title>
+      <description><![CDATA[Why I'm building this in the open, and what I'm hoping comes out of it.]]></description>
+      <link>https://cuferrous.github.io/Ferrous/journal.html</link>
+      <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
