@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferrous — Guestbook</title>
+<style>
+  :root {
+    --ink: #F5E9DA;
+    --ink-soft: #E0C9AE;
+    --copper: #F0A868;
+    --rust: #D9782A;
+    --line: rgba(255,255,255,0.22);
+  }
+  * { box-sizing: border-box; }
+  html { background-color: #140b06; }
+  body {
+    margin: 0;
+    background-image: url('ferrous-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: top center;
+    background-color: #140b06;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+  .back-link {
+    display: inline-block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .back-link:hover { color: var(--copper); }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+    margin: 0 0 0.4rem;
+  }
+  .underline { width: 140px; height: 3px; background: var(--rust); margin: 0.6rem 0 1.5rem; }
+  .intro {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    max-width: 46ch;
+    margin: 0 0 2.5rem;
+  }
+  h2.section-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    margin: 2.5rem 0 0.5rem;
+  }
+  .index { border-top: 1px solid var(--line); }
+  .entry {
+    display: block;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .entry-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .entry-date {
+    color: var(--copper);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .entry-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.3rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .empty {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    padding: 1.5rem 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    margin-bottom: 0.4rem;
+  }
+  input, textarea {
+    width: 100%;
+    background: rgba(20,11,6,0.55);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1.4rem;
+  }
+  textarea { resize: vertical; min-height: 100px; }
+  input::placeholder, textarea::placeholder { color: var(--ink-soft); opacity: 0.6; }
+  input:focus, textarea:focus { outline: none; border-color: var(--copper); }
+  button {
+    background: var(--rust);
+    color: var(--ink);
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.7rem 1.6rem;
+    cursor: pointer;
+  }
+  button:hover { background: var(--copper); }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .status { margin-top: 1.2rem; font-size: 0.9rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .status.success { color: #B7D9A8; }
+  .status.error { color: #E29A8A; }
+  .note {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    opacity: 0.8;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+  }
+  footer {
+    margin-top: 3rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  footer a { color: var(--copper); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back-link" href="index.html">&larr; Back to Ferrous</a>
+
+    <h1>Guestbook</h1>
+    <div class="underline"></div>
+    <p class="intro">Leave a note if you passed through. Messages are reviewed before they show up below.</p>
+
+    <form id="guestbook-form">
+      <input type="hidden" name="access_key" value="b7b6294b-d998-4c3f-af4d-d647aff2c884">
+      <input type="hidden" name="subject" value="New guestbook message on Ferrous">
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Say hello" required></textarea>
+
+      <button type="submit" id="submit-btn">Sign the guestbook</button>
+      <div id="form-status" class="status"></div>
+      <p class="note">Submissions are reviewed before appearing publicly.</p>
+    </form>
+
+    <h2 class="section-label">Entries</h2>
+    <div class="index" id="guestbook-list"></div>
+
+    <footer>
+      Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('guestbook-form');
+    const statusEl = document.getElementById('form-status');
+    const btn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      statusEl.textContent = '';
+      statusEl.className = 'status';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          statusEl.textContent = 'Thanks — sent for review.';
+          statusEl.classList.add('success');
+          form.reset();
+        } else {
+          throw new Error(result.message || 'Something went wrong.');
+        }
+      } catch (err) {
+        statusEl.textContent = 'Could not send that. Try again in a moment.';
+        statusEl.classList.add('error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign the guestbook';
+      }
+    });
+
+    async function loadGuestbook() {
+      const container = document.getElementById('guestbook-list');
+      try {
+        const res = await fetch('data/guestbook.json?t=' + Date.now());
+        const json = await res.json();
+        if (!json.entries || json.entries.length === 0) {
+          container.innerHTML = '<div class="empty">No entries yet.</div>';
+          return;
+        }
+        container.innerHTML = json.entries.map(e => `
+          <div class="entry">
+            <div class="entry-row">
+              <span class="entry-name">${e.name}</span>
+              <span class="entry-date">${e.date}</span>
+            </div>
+            <p class="entry-desc">${e.message}</p>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty">Could not load entries.</div>';
+      }
+    }
+
+    loadGuestbook();
+  </script>
+</body>
+</html>
