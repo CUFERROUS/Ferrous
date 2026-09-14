@@ -251,6 +251,258 @@
           </a>
         `).join('');
         setProjectCount(json.entries.length);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferrous</title>
+<style>
+  :root {
+    --ink: #F5E9DA;
+    --ink-soft: #E0C9AE;
+    --copper: #F0A868;
+    --rust: #D9782A;
+    --line: rgba(255,255,255,0.22);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    background-color: #140b06;
+  }
+
+  body {
+    margin: 0;
+    background-image: url('ferrous-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: top center;
+    background-color: #140b06;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .site-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .site-nav a:hover, .site-nav a.active { color: var(--copper); }
+
+  h1 {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 2.75rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+    margin: 0 0 0.4rem;
+  }
+
+  .underline {
+    width: 140px;
+    height: 3px;
+    background: var(--rust);
+    margin: 0.6rem 0 3rem;
+  }
+
+  h2.section-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    margin: 0 0 0.5rem;
+  }
+
+  .index {
+    border-top: 1px solid var(--line);
+  }
+
+  .entry {
+    display: block;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .entry:hover .entry-name {
+    color: var(--copper);
+  }
+
+  .entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .entry-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .entry-arrow {
+    color: var(--copper);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .entry-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .empty {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    padding: 1.5rem 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .oxidized {
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .oxidized p {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  .cursor {
+    color: var(--copper);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  footer {
+    margin-top: 3rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  footer a { color: var(--copper); }
+
+  .links-row {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .links-row a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .links-row a:hover { color: var(--copper); }
+
+  .link-sep {
+    color: var(--ink-soft);
+    margin: 0 0.6rem;
+    opacity: 0.5;
+  }
+
+  .stats-row {
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Ferrous</h1>
+    <div class="underline"></div>
+
+    <nav class="site-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="journal.html">Journal</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="guestbook.html">Guestbook</a>
+    </nav>
+
+    <h2 class="section-label">Projects</h2>
+    <div class="index" id="projects-list"></div>
+
+    <div class="oxidized">
+      <p id="typewriter"><span id="typewriter-text"></span><span class="cursor">_</span></p>
+    </div>
+
+    <div class="links-row" id="links-row"></div>
+
+    <div class="stats-row">
+      <span id="project-count-stat"></span>
+    </div>
+
+    <footer>
+      Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
+    </footer>
+  </div>
+
+  <script>
+    async function loadLinks() {
+      try {
+        const res = await fetch('data/links.json?t=' + Date.now());
+        const json = await res.json();
+        const row = document.getElementById('links-row');
+        row.innerHTML = json.entries.map(l =>
+          `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+        ).join('<span class="link-sep">·</span>');
+      } catch (err) {
+        console.error('Could not load links', err);
+      }
+    }
+
+    async function loadProjects() {
+      const container = document.getElementById('projects-list');
+      try {
+        const res = await fetch('data/projects.json?t=' + Date.now());
+        const json = await res.json();
+        container.innerHTML = json.entries.map(p => `
+          <a class="entry" href="${p.url}">
+            <div class="entry-row">
+              <span class="entry-name">${p.name}</span>
+              <span class="entry-arrow">View repo</span>
+            </div>
+            <p class="entry-desc">${p.description}</p>
+          </a>
+        `).join('');
+        setProjectCount(json.entries.length);
       } catch (err) {
         container.innerHTML = '<div class="empty">Could not load projects.</div>';
       }
@@ -276,7 +528,7 @@
       step();
     }
 
-    typeWriter( 'Ferrous by Cuferrous', 'typewriter-text', 45);
+    typeWriter('Ferrous by Cuferrous', 'typewriter-text', 45);
   </script>
 </body>
 </html>
