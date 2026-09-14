@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cuferrous.github.io/Ferrous/sitemap.xml
