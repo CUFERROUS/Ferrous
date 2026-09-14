@@ -47,6 +47,19 @@ collections:
               { label: "URL", name: "url", widget: "string" }
             ]}
 
+  - name: "guestbook"
+    label: "Guestbook"
+    files:
+      - name: "entries"
+        label: "Guestbook entries"
+        file: "data/guestbook.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Name", name: "name", widget: "string" },
+              { label: "Message", name: "message", widget: "text" },
+              { label: "Date", name: "date", widget: "string", hint: "e.g. Sep 2026" }
+            ]}
+
   - name: "notes"
     label: "Notes"
     files:
