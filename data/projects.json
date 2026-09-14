@@ -3,17 +3,17 @@
     {
       "name": "Emdexium",
       "url": "https://github.com/CUFERROUS/emdexium",
-      "description": "Professional cyber deck in development."
+      "description": "A \"Swiss Army Knife\" type Cyber deck, built from scratch. It runs Linux (Emdexium Linux), Windows (Via its triple boot system!), and a ESP 32 microcontroller for IoT."
     },
     {
       "name": "ANON",
       "url": "https://github.com/CUFERROUS/anon",
-      "description": "A game. Development has currently stopped."
+      "description": "My narrative-driven 1st person game that will be available on steam once finished. It is a PCVR only game and will be physics driven with realistic graphics powered by Unreal Engine. Keep in mind development has stopped and when it does continue, it is just a fun side project, so don't expect it soon."
     },
     {
       "name": "unfounded",
       "url": "https://github.com/CUFERROUS/unfounded",
-      "description": "What did you expect to see here?"
+      "description": "What did you expect to see here? Leave a suggestion for what I should do!"
     }
   ]
 }
