@@ -106,6 +106,13 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
 
+  .empty {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    padding: 1.5rem 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
   .oxidized {
     margin-top: 5rem;
     padding-top: 2.5rem;
@@ -182,33 +189,7 @@
     <div style="margin-bottom: 3rem;"></div>
 
     <h2 class="section-label">Projects</h2>
-    <div class="index">
-
-      <a class="entry" href="https://github.com/CUFERROUS/emdexium">
-        <div class="entry-row">
-          <span class="entry-name">Emdexium</span>
-          <span class="entry-arrow">View repo</span>
-        </div>
-        <p class="entry-desc">Professional cyber deck in development.</p>
-      </a>
-
-      <a class="entry" href="https://github.com/CUFERROUS/anon">
-        <div class="entry-row">
-          <span class="entry-name">ANON</span>
-          <span class="entry-arrow">View repo</span>
-        </div>
-        <p class="entry-desc">A game. Development has currently stopped.</p>
-      </a>
-
-      <a class="entry" href="https://github.com/CUFERROUS/unfounded">
-        <div class="entry-row">
-          <span class="entry-name">unfounded</span>
-          <span class="entry-arrow">View repo</span>
-        </div>
-        <p class="entry-desc">What did you expect to see here?</p>
-      </a>
-
-    </div>
+    <div class="index" id="projects-list"></div>
 
     <div class="oxidized">
       <p id="typewriter"><span id="typewriter-text"></span><span class="cursor">_</span></p>
@@ -240,13 +221,32 @@
       }
     }
 
-    function setProjectCount() {
-      const count = document.querySelectorAll('.index .entry').length;
+    async function loadProjects() {
+      const container = document.getElementById('projects-list');
+      try {
+        const res = await fetch('data/projects.json?t=' + Date.now());
+        const json = await res.json();
+        container.innerHTML = json.entries.map(p => `
+          <a class="entry" href="${p.url}">
+            <div class="entry-row">
+              <span class="entry-name">${p.name}</span>
+              <span class="entry-arrow">View repo</span>
+            </div>
+            <p class="entry-desc">${p.description}</p>
+          </a>
+        `).join('');
+        setProjectCount(json.entries.length);
+      } catch (err) {
+        container.innerHTML = '<div class="empty">Could not load projects.</div>';
+      }
+    }
+
+    function setProjectCount(count) {
       document.getElementById('project-count-stat').textContent = count + ' project' + (count === 1 ? '' : 's') + ' tracked';
     }
 
     loadLinks();
-    setProjectCount();
+    loadProjects();
 
     function typeWriter(text, elId, speed) {
       const el = document.getElementById(elId);
