@@ -217,13 +217,14 @@
       });
     });
 
-    function renderEntries(containerId, entries) {
+        function renderEntries(containerId, entries) {
       const container = document.getElementById(containerId);
       if (!entries || entries.length === 0) {
         container.innerHTML = '<div class="empty">Nothing here yet.</div>';
         return;
       }
-      container.innerHTML = entries.map(e => `
+      const ordered = [...entries].reverse();
+      container.innerHTML = ordered.map(e => `
         <a class="entry" href="${e.link || '#'}">
           <div class="entry-row">
             <span class="entry-name">${e.title}</span>
