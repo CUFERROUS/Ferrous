@@ -7,6 +7,19 @@ media_folder: "media"
 public_folder: "/media"
 
 collections:
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "entries"
+        label: "Project entries"
+        file: "data/projects.json"
+        fields:
+          - { label: "Entries", name: "entries", widget: "list", fields: [
+              { label: "Name", name: "name", widget: "string" },
+              { label: "Repo URL", name: "url", widget: "string" },
+              { label: "Description", name: "description", widget: "text" }
+            ]}
+
   - name: "journal"
     label: "Journal"
     files:
@@ -43,8 +56,8 @@ collections:
         file: "data/links.json"
         fields:
           - { label: "Entries", name: "entries", widget: "list", fields: [
-              { label: "Label", name: "label", widget: "string", hint: "e.g. GitHub, Twitter" },
-              { label: "URL", name: "url", widget: "string" }
+              { label: "Label", name: "label", widget: "string", hint: "e.g. GitHub, Email, Twitter" },
+              { label: "URL", name: "url", widget: "string", hint: "Use mailto:you@example.com for email" }
             ]}
 
   - name: "guestbook"
