@@ -9,8 +9,9 @@ function escapeXml(str) {
 
 const site = 'https://cuferrous.github.io/Ferrous';
 const data = JSON.parse(fs.readFileSync('data/journal.json', 'utf8'));
+const orderedEntries = [...data.entries].reverse();
 
-const items = data.entries.map(e => {
+const items = orderedEntries.map(e => {
   const link = e.link && e.link !== '#' ? e.link : `${site}/journal.html`;
   const parsed = new Date(e.date);
   const pubDate = isNaN(parsed) ? new Date().toUTCString() : parsed.toUTCString();
