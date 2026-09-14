@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferrous — Journal</title>
+<link rel="alternate" type="application/rss+xml" title="Ferrous Journal" href="feed.xml">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -12,8 +13,11 @@
     --rust: #D9782A;
     --line: rgba(255,255,255,0.22);
   }
+
   * { box-sizing: border-box; }
+
   html { background-color: #140b06; }
+
   body {
     margin: 0;
     background-image: url('ferrous-bg.jpg');
@@ -26,7 +30,13 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+  }
+
   .back-link {
     display: inline-block;
     color: var(--ink-soft);
@@ -35,7 +45,9 @@
     margin-bottom: 2rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .back-link:hover { color: var(--copper); }
+
   h1 {
     font-family: Georgia, "Iowan Old Style", serif;
     font-size: 2.5rem;
@@ -44,8 +56,21 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.55);
     margin: 0 0 0.4rem;
   }
-  .underline { width: 140px; height: 3px; background: var(--rust); margin: 0.6rem 0 2.5rem; }
-  .tabs { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+
+  .underline {
+    width: 140px;
+    height: 3px;
+    background: var(--rust);
+    margin: 0.6rem 0 2.5rem;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+
   .tab-btn {
     background: none;
     border: none;
@@ -58,11 +83,19 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     border-bottom: 2px solid transparent;
   }
+
   .tab-btn:hover { color: var(--ink); }
-  .tab-btn.active { color: var(--ink); border-bottom: 2px solid var(--copper); }
+
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--copper);
+  }
+
   .panel { display: none; }
   .panel.active { display: block; }
+
   .index { border-top: 1px solid var(--line); }
+
   .entry {
     display: block;
     padding: 1.1rem 0;
@@ -70,44 +103,58 @@
     text-decoration: none;
     color: inherit;
   }
+
   .entry:hover .entry-name { color: var(--copper); }
-  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+
+  .entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
   .entry-name {
     font-size: 1.05rem;
     font-weight: 500;
     color: var(--ink);
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .entry-date {
     color: var(--copper);
     font-size: 0.85rem;
     flex-shrink: 0;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .entry-desc {
     color: var(--ink-soft);
     font-size: 0.92rem;
     margin-top: 0.3rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .empty {
     color: var(--ink-soft);
     font-size: 0.95rem;
     padding: 1.5rem 0;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   footer {
     margin-top: 3rem;
     color: var(--ink-soft);
     font-size: 0.85rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   footer a { color: var(--copper); }
 </style>
 </head>
 <body>
   <div class="wrap">
     <a class="back-link" href="index.html">&larr; Back to Ferrous</a>
+    <a class="back-link" href="feed.xml" style="float: right;">RSS &rarr;</a>
 
     <h1>Journal</h1>
     <div class="underline"></div>
@@ -143,6 +190,7 @@
       btn.addEventListener('click', () => {
         buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
         panels.forEach(p => p.classList.remove('active'));
+
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
         document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
