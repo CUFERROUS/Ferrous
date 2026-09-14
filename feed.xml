@@ -12,5 +12,12 @@
       <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
       <pubDate>Sun, 13 Sep 2026 00:00:00 GMT</pubDate>
     </item>
+    <item>
+      <title>The improved page (more detail than notes give)</title>
+      <description><![CDATA[Late yesterday and today I've turned Ferrous from an ugly static page, into something I can actually use. I added a CMS admin page so I don't have touch code every time I want to edit something, Projects, Journal, Tutorials, Links, and Guestbook are all editable now (only me can edit). I added an RSS Feed that auto updates (visit it in the top right corner of this page!), I added a guest book and suggestions form, guest book entry's will be sent to me then added to the site. Then finally I gave the page a new navigation bar and added a typewriter effect. I've put two days into this so I hope it works, and if it doesn't, suggestions is also for bugs, let me know.]]></description>
+      <link>https://cuferrous.github.io/Ferrous/journal.html</link>
+      <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
+      <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
   </channel>
 </rss>
