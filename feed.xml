@@ -6,11 +6,11 @@
     <description>Journal entries from Ferrous</description>
 
     <item>
-      <title>Starting Ferrous</title>
-      <description><![CDATA[I'm just using this as a binder for my projects and blog.]]></description>
+      <title>Site is indexed!</title>
+      <description><![CDATA[Starting today you can look up terms such as "emdexium" and find this page. This is a huge milestone for Ferrous.]]></description>
       <link>https://cuferrous.github.io/Ferrous/journal.html</link>
       <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
-      <pubDate>Sun, 13 Sep 2026 00:00:00 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>The improved page (more detail than notes give)</title>
@@ -18,6 +18,13 @@
       <link>https://cuferrous.github.io/Ferrous/journal.html</link>
       <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
       <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Starting Ferrous</title>
+      <description><![CDATA[I'm just using this as a binder for my projects and blog.]]></description>
+      <link>https://cuferrous.github.io/Ferrous/journal.html</link>
+      <guid>https://cuferrous.github.io/Ferrous/journal.html</guid>
+      <pubDate>Sun, 13 Sep 2026 00:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>
