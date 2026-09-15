@@ -11,6 +11,12 @@
       "date": "Sep 14 2026",
       "description": "Late yesterday and today I've turned Ferrous from an ugly static page, into something I can actually use. I added a CMS admin page so I don't have touch code every time I want to edit something, Projects, Journal, Tutorials, Links, and Guestbook are all editable now (only me can edit). I added an RSS Feed that auto updates (visit it in the top right corner of this page!), I added a guest book and suggestions form, guest book entry's will be sent to me then added to the site. Then finally I gave the page a new navigation bar and added a typewriter effect. I've put two days into this so I hope it works, and if it doesn't, suggestions is also for bugs, let me know.",
       "link": ""
+    },
+    {
+      "title": "Site is indexed!",
+      "date": "Sep 15 2026",
+      "description": "Starting today you can look up terms such as \"emdexium\" and find this page. This is a huge milestone for Ferrous.",
+      "link": "#"
     }
   ]
 }
