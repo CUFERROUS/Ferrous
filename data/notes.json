@@ -17,6 +17,12 @@
       "date": "Sep 15 2026",
       "description": "I uploaded the first tutorial, it is about OSINT, and briefly covers OSINT safety. Thank you to Cullis for the suggestion.",
       "link": "#"
+    },
+    {
+      "title": "Fixed format error",
+      "date": "Sep 15 2026",
+      "description": "I noticed that my double line breaks were not showing up due to a CSS format that I didn't catch, HTML treated whitespace weirdly on the tutorial. The site might go down for like 15 seconds while I push the update.",
+      "link": "#"
     }
   ]
 }
