@@ -8,9 +8,9 @@
     },
     {
       "title": "Updates",
-      "date": "Sep 13-14",
+      "date": "Sep 13-14 (link attached)",
       "description": "Added: CMS admin panel, auto-updating RSS feed, Suggestions page, Guestbook, site-wide nav bar, homepage typewriter effect. Removed: visitor counter",
-      "link": "#https://www.inoreader.com/?add_feed=https://cuferrous.github.io/Ferrous/feed.xml"
+      "link": "https://www.inoreader.com/?add_feed=https://cuferrous.github.io/Ferrous/feed.xml"
     },
     {
       "title": "New tutorial",
