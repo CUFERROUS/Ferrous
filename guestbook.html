@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ferrous — Guestbook</title>
-<link rel="canonical" href="https://cuferrous.github.io/Ferrous/guestbook.html">
+<title>Ferrous — Suggestions</title>
+<link rel="canonical" href="https://cuferrous.github.io/Ferrous/suggestions.html">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -37,11 +37,6 @@
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  #guestbook-list {
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
-  }
-  #guestbook-list.loaded { opacity: 1; }
   .site-nav {
     display: flex;
     flex-wrap: wrap;
@@ -84,50 +79,6 @@
     max-width: 46ch;
     margin: 0 0 2.5rem;
   }
-  h2.section-label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    margin: 2.5rem 0 0.5rem;
-  }
-  .index { border-top: 1px solid var(--line); }
-  .entry {
-    display: block;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .entry-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-  .entry-name {
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--ink);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
-  .entry-date {
-    color: var(--copper);
-    font-size: 0.85rem;
-    flex-shrink: 0;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
-  .entry-desc {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin-top: 0.3rem;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    white-space: pre-wrap;
-  }
-  .empty {
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-    padding: 1.5rem 0;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
   label {
     display: block;
     font-size: 0.9rem;
@@ -146,9 +97,12 @@
     padding: 0.7rem 0.8rem;
     margin-bottom: 1.4rem;
   }
-  textarea { resize: vertical; min-height: 100px; }
+  textarea { resize: vertical; min-height: 120px; }
   input::placeholder, textarea::placeholder { color: var(--ink-soft); opacity: 0.6; }
-  input:focus, textarea:focus { outline: none; border-color: var(--copper); }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--copper);
+  }
   button {
     background: var(--rust);
     color: var(--ink);
@@ -162,18 +116,15 @@
   }
   button:hover { background: var(--copper); }
   button:disabled { opacity: 0.6; cursor: default; }
-  .status { margin-top: 1.2rem; font-size: 0.9rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .status {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
   .status.success { color: #B7D9A8; }
   .status.error { color: #E29A8A; }
-  .note {
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    opacity: 0.8;
-    margin-top: -1rem;
-    margin-bottom: 1.5rem;
-  }
   footer {
-    margin-top: 3rem;
+    margin-top: 4rem;
     color: var(--ink-soft);
     font-size: 0.85rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
@@ -186,32 +137,27 @@
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="journal.html">Journal</a>
-      <a href="tools.html">Tools</a>
-      <a href="suggestions.html">Suggestions</a>
-      <a href="guestbook.html" class="active">Guestbook</a>
+      <a href="suggestions.html" class="active">Suggestions</a>
+      <a href="guestbook.html">Guestbook</a>
     </nav>
 
-    <h1>Guestbook</h1>
+    <h1>Suggestions</h1>
     <div class="underline"></div>
-    <p class="intro">Leave a note if you passed through. Messages are reviewed before they show up below.</p>
+    <p class="intro">Got an idea, a bug, or something you think should be different? Drop it here — it goes straight to me.</p>
 
-    <form id="guestbook-form">
+    <form id="suggestion-form">
       <input type="hidden" name="access_key" value="b7b6294b-d998-4c3f-af4d-d647aff2c884">
-      <input type="hidden" name="subject" value="New guestbook message on Ferrous">
+      <input type="hidden" name="subject" value="New suggestion from Ferrous">
 
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required>
+      <label for="name">Name (optional)</label>
+      <input type="text" id="name" name="name" placeholder="Your name">
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" placeholder="Say hello" required></textarea>
+      <label for="message">Suggestion</label>
+      <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
 
-      <button type="submit" id="submit-btn">Sign the guestbook</button>
+      <button type="submit" id="submit-btn">Send suggestion</button>
       <div id="form-status" class="status"></div>
-      <p class="note">Submissions are reviewed before appearing publicly.</p>
     </form>
-
-    <h2 class="section-label">Entries</h2>
-    <div class="index" id="guestbook-list"></div>
 
     <footer>
       Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
@@ -219,7 +165,7 @@
   </div>
 
   <script>
-    const form = document.getElementById('guestbook-form');
+    const form = document.getElementById('suggestion-form');
     const statusEl = document.getElementById('form-status');
     const btn = document.getElementById('submit-btn');
 
@@ -239,7 +185,7 @@
         const result = await res.json();
 
         if (result.success) {
-          statusEl.textContent = 'Thanks — sent for review.';
+          statusEl.textContent = 'Thanks — that\'s been sent.';
           statusEl.classList.add('success');
           form.reset();
         } else {
@@ -250,36 +196,9 @@
         statusEl.classList.add('error');
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Sign the guestbook';
+        btn.textContent = 'Send suggestion';
       }
     });
-
-    async function loadGuestbook() {
-      const container = document.getElementById('guestbook-list');
-      try {
-        const res = await fetch('data/guestbook.json?t=' + Date.now());
-        const json = await res.json();
-        if (!json.entries || json.entries.length === 0) {
-          container.innerHTML = '<div class="empty">No entries yet.</div>';
-          container.classList.add('loaded');
-          return;
-        }
-        container.innerHTML = json.entries.map(e => `
-          <div class="entry">
-            <div class="entry-row">
-              <span class="entry-name">${e.name}</span>
-              <span class="entry-date">${e.date}</span>
-            </div>
-            <p class="entry-desc">${e.message}</p>
-          </div>
-        `).join('');
-        container.classList.add('loaded');
-      } catch (err) {
-        container.innerHTML = '<div class="empty">Could not load entries.</div>';
-      }
-    }
-
-    loadGuestbook();
   </script>
 </body>
 </html>
