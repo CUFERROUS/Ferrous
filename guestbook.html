@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferrous — Guestbook</title>
+<link rel="canonical" href="https://cuferrous.github.io/Ferrous/guestbook.html">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -26,11 +27,30 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+    animation: fadeIn 0.6s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  #guestbook-list {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+  #guestbook-list.loaded { opacity: 1; }
   .site-nav {
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
     margin-bottom: 2.5rem;
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 3rem 1.2rem 3rem; }
+    h1 { font-size: 2rem; }
   }
   .site-nav a {
     color: var(--ink-soft);
@@ -100,6 +120,7 @@
     font-size: 0.92rem;
     margin-top: 0.3rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
   }
   .empty {
     color: var(--ink-soft);
@@ -165,6 +186,7 @@
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="journal.html">Journal</a>
+      <a href="tools.html">Tools</a>
       <a href="suggestions.html">Suggestions</a>
       <a href="guestbook.html" class="active">Guestbook</a>
     </nav>
@@ -239,6 +261,7 @@
         const json = await res.json();
         if (!json.entries || json.entries.length === 0) {
           container.innerHTML = '<div class="empty">No entries yet.</div>';
+          container.classList.add('loaded');
           return;
         }
         container.innerHTML = json.entries.map(e => `
@@ -250,6 +273,7 @@
             <p class="entry-desc">${e.message}</p>
           </div>
         `).join('');
+        container.classList.add('loaded');
       } catch (err) {
         container.innerHTML = '<div class="empty">Could not load entries.</div>';
       }
