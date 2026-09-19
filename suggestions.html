@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ferrous — Suggestions</title>
-<link rel="canonical" href="https://cuferrous.github.io/Ferrous/suggestions.html">
+<title>Ferrous — Journal</title>
+<link rel="alternate" type="application/rss+xml" title="Ferrous Journal" href="feed.xml">
+<link rel="canonical" href="https://cuferrous.github.io/Ferrous/journal.html">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -13,8 +14,11 @@
     --rust: #D9782A;
     --line: rgba(255,255,255,0.22);
   }
+
   * { box-sizing: border-box; }
+
   html { background-color: #140b06; }
+
   body {
     margin: 0;
     background-image: url('ferrous-bg.jpg');
@@ -27,33 +31,48 @@
     line-height: 1.6;
     min-height: 100vh;
   }
+
   .wrap {
     max-width: 640px;
     margin: 0 auto;
     padding: 5rem 1.5rem 4rem;
     animation: fadeIn 0.6s ease-out;
   }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .panel .index {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .panel .index.loaded { opacity: 1; }
+
   .site-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 1.5rem;
     margin-bottom: 2.5rem;
   }
+
   @media (max-width: 480px) {
     .wrap { padding: 3rem 1.2rem 3rem; }
     h1 { font-size: 2rem; }
+    .site-nav a[style*="margin-left"] { margin-left: 0 !important; }
   }
+
   .site-nav a {
     color: var(--ink-soft);
     text-decoration: none;
     font-size: 0.9rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .site-nav a:hover, .site-nav a.active { color: var(--copper); }
+
   .back-link {
     display: inline-block;
     color: var(--ink-soft);
@@ -62,7 +81,9 @@
     margin-bottom: 2rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   .back-link:hover { color: var(--copper); }
+
   h1 {
     font-family: Georgia, "Iowan Old Style", serif;
     font-size: 2.5rem;
@@ -71,64 +92,99 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.55);
     margin: 0 0 0.4rem;
   }
-  .underline { width: 140px; height: 3px; background: var(--rust); margin: 0.6rem 0 1.5rem; }
-  .intro {
-    color: var(--ink-soft);
-    font-size: 1rem;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    max-width: 46ch;
-    margin: 0 0 2.5rem;
-  }
-  label {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    margin-bottom: 0.4rem;
-  }
-  input, textarea {
-    width: 100%;
-    background: rgba(20,11,6,0.55);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    color: var(--ink);
-    font-family: inherit;
-    font-size: 0.95rem;
-    padding: 0.7rem 0.8rem;
-    margin-bottom: 1.4rem;
-  }
-  textarea { resize: vertical; min-height: 120px; }
-  input::placeholder, textarea::placeholder { color: var(--ink-soft); opacity: 0.6; }
-  input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--copper);
-  }
-  button {
+
+  .underline {
+    width: 140px;
+    height: 3px;
     background: var(--rust);
-    color: var(--ink);
-    border: none;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.7rem 1.6rem;
-    cursor: pointer;
+    margin: 0.6rem 0 2.5rem;
   }
-  button:hover { background: var(--copper); }
-  button:disabled { opacity: 0.6; cursor: default; }
-  .status {
-    margin-top: 1.2rem;
-    font-size: 0.9rem;
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    font-family: inherit;
+    padding: 0.6rem 0.2rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    border-bottom: 2px solid transparent;
+  }
+
+  .tab-btn:hover { color: var(--ink); }
+
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--copper);
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .index { border-top: 1px solid var(--line); }
+
+  .entry {
+    display: block;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .entry:hover .entry-name { color: var(--copper); }
+
+  .entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .entry-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
-  .status.success { color: #B7D9A8; }
-  .status.error { color: #E29A8A; }
+
+  .entry-date {
+    color: var(--copper);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .entry-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.3rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+  }
+
+  .empty {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    padding: 1.5rem 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
   footer {
-    margin-top: 4rem;
+    margin-top: 3rem;
     color: var(--ink-soft);
     font-size: 0.85rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
+
   footer a { color: var(--copper); }
 </style>
 </head>
@@ -136,29 +192,32 @@
   <div class="wrap">
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="journal.html">Journal</a>
-      <a href="tools.html">Tools</a>
-      <a href="suggestions.html" class="active">Suggestions</a>
+      <a href="journal.html" class="active">Journal</a>
+      <a href="suggestions.html">Suggestions</a>
       <a href="guestbook.html">Guestbook</a>
+      <a href="https://www.inoreader.com/?add_feed=https://cuferrous.github.io/Ferrous/feed.xml" style="margin-left: auto;" target="_blank" rel="noopener">RSS &rarr;</a>
     </nav>
 
-    <h1>Suggestions</h1>
+    <h1>Journal</h1>
     <div class="underline"></div>
-    <p class="intro">Got an idea, a bug, or something you think should be different? Drop it here — it goes straight to me.</p>
 
-    <form id="suggestion-form">
-      <input type="hidden" name="access_key" value="b7b6294b-d998-4c3f-af4d-d647aff2c884">
-      <input type="hidden" name="subject" value="New suggestion from Ferrous">
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="journal" role="tab" aria-selected="true">Journal</button>
+      <button class="tab-btn" data-tab="tutorials" role="tab" aria-selected="false">Tutorials</button>
+      <button class="tab-btn" data-tab="notes" role="tab" aria-selected="false">Notes</button>
+    </div>
 
-      <label for="name">Name (optional)</label>
-      <input type="text" id="name" name="name" placeholder="Your name">
+    <div class="panel active" id="panel-journal">
+      <div class="index" id="list-journal"></div>
+    </div>
 
-      <label for="message">Suggestion</label>
-      <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
+    <div class="panel" id="panel-tutorials">
+      <div class="index" id="list-tutorials"></div>
+    </div>
 
-      <button type="submit" id="submit-btn">Send suggestion</button>
-      <div id="form-status" class="status"></div>
-    </form>
+    <div class="panel" id="panel-notes">
+      <div class="index" id="list-notes"></div>
+    </div>
 
     <footer>
       Built and maintained by <a href="https://github.com/CUFERROUS">CUFERROUS</a>.
@@ -166,40 +225,53 @@
   </div>
 
   <script>
-    const form = document.getElementById('suggestion-form');
-    const statusEl = document.getElementById('form-status');
-    const btn = document.getElementById('submit-btn');
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-      statusEl.textContent = '';
-      statusEl.className = 'status';
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
 
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form)))
-        });
-        const result = await res.json();
-
-        if (result.success) {
-          statusEl.textContent = 'Thanks — that\'s been sent.';
-          statusEl.classList.add('success');
-          form.reset();
-        } else {
-          throw new Error(result.message || 'Something went wrong.');
-        }
-      } catch (err) {
-        statusEl.textContent = 'Could not send that. Try again in a moment.';
-        statusEl.classList.add('error');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Send suggestion';
-      }
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+      });
     });
+
+    function renderEntries(containerId, entries) {
+      const container = document.getElementById(containerId);
+      if (!entries || entries.length === 0) {
+        container.innerHTML = '<div class="empty">Nothing here yet.</div>';
+        container.classList.add('loaded');
+        return;
+      }
+      const ordered = [...entries].reverse();
+      container.innerHTML = ordered.map(e => `
+        <a class="entry" href="${e.link || '#'}">
+          <div class="entry-row">
+            <span class="entry-name">${e.title}</span>
+            <span class="entry-date">${e.date}</span>
+          </div>
+          <p class="entry-desc">${e.description}</p>
+        </a>
+      `).join('');
+      container.classList.add('loaded');
+    }
+
+    async function loadData(file, containerId) {
+      try {
+        const res = await fetch(file + '?t=' + Date.now());
+        const json = await res.json();
+        renderEntries(containerId, json.entries);
+      } catch (err) {
+        document.getElementById(containerId).innerHTML = '<div class="empty">Couldn\'t load entries.</div>';
+      }
+    }
+
+    loadData('data/journal.json', 'list-journal');
+    loadData('data/tutorials.json', 'list-tutorials');
+    loadData('data/notes.json', 'list-notes');
   </script>
 </body>
 </html>
