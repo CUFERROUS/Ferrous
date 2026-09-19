@@ -3,18 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ferrous</title>
-<meta name="description" content="Ferrous — a binder of projects, journal, and tutorials by CUFERROUS.">
-<meta property="og:title" content="Ferrous">
-<meta property="og:description" content="A binder of projects, journal, and tutorials by CUFERROUS.">
-<meta property="og:image" content="https://cuferrous.github.io/Ferrous/og-image.png">
-<meta property="og:url" content="https://cuferrous.github.io/Ferrous/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ferrous">
-<meta name="twitter:description" content="A binder of projects, journal, and tutorials by CUFERROUS.">
-<meta name="twitter:image" content="https://cuferrous.github.io/Ferrous/og-image.png">
-<link rel="canonical" href="https://cuferrous.github.io/Ferrous/">
+<title>Ferrous — Journal</title>
+<link rel="alternate" type="application/rss+xml" title="Ferrous Journal" href="feed.xml">
+<link rel="canonical" href="https://cuferrous.github.io/Ferrous/journal.html">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -26,9 +17,7 @@
 
   * { box-sizing: border-box; }
 
-  html {
-    background-color: #140b06;
-  }
+  html { background-color: #140b06; }
 
   body {
     margin: 0;
@@ -55,14 +44,12 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  #projects-list, #links-row {
+  .panel .index {
     opacity: 0;
     transition: opacity 0.4s ease-out;
   }
 
-  #projects-list.loaded, #links-row.loaded {
-    opacity: 1;
-  }
+  .panel .index.loaded { opacity: 1; }
 
   .site-nav {
     display: flex;
@@ -73,7 +60,8 @@
 
   @media (max-width: 480px) {
     .wrap { padding: 3rem 1.2rem 3rem; }
-    h1 { font-size: 2.2rem; }
+    h1 { font-size: 2rem; }
+    .site-nav a[style*="margin-left"] { margin-left: 0 !important; }
   }
 
   .site-nav a {
@@ -85,9 +73,20 @@
 
   .site-nav a:hover, .site-nav a.active { color: var(--copper); }
 
+  .back-link {
+    display: inline-block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  .back-link:hover { color: var(--copper); }
+
   h1 {
     font-family: Georgia, "Iowan Old Style", serif;
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     font-weight: 500;
     color: var(--ink);
     text-shadow: 0 2px 8px rgba(0,0,0,0.55);
@@ -98,20 +97,40 @@
     width: 140px;
     height: 3px;
     background: var(--rust);
-    margin: 0.6rem 0 3rem;
+    margin: 0.6rem 0 2.5rem;
   }
 
-  h2.section-label {
-    font-size: 0.95rem;
-    font-weight: 500;
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
     color: var(--ink-soft);
+    font-size: 0.95rem;
+    font-family: inherit;
+    padding: 0.6rem 0.2rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    margin: 0 0 0.5rem;
+    border-bottom: 2px solid transparent;
   }
 
-  .index {
-    border-top: 1px solid var(--line);
+  .tab-btn:hover { color: var(--ink); }
+
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--copper);
   }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .index { border-top: 1px solid var(--line); }
 
   .entry {
     display: block;
@@ -121,9 +140,7 @@
     color: inherit;
   }
 
-  .entry:hover .entry-name {
-    color: var(--copper);
-  }
+  .entry:hover .entry-name { color: var(--copper); }
 
   .entry-row {
     display: flex;
@@ -139,9 +156,9 @@
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
 
-  .entry-arrow {
+  .entry-date {
     color: var(--copper);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     flex-shrink: 0;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
@@ -149,8 +166,9 @@
   .entry-desc {
     color: var(--ink-soft);
     font-size: 0.92rem;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
   }
 
   .empty {
@@ -158,29 +176,6 @@
     font-size: 0.95rem;
     padding: 1.5rem 0;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
-
-  .oxidized {
-    margin-top: 3rem;
-    padding-top: 0.5rem;
-  }
-
-  .oxidized p {
-    font-family: Georgia, "Iowan Old Style", serif;
-    font-size: 1.3rem;
-    color: var(--ink);
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-    margin: 0;
-    max-width: 40ch;
-  }
-
-  .cursor {
-    color: var(--copper);
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    50% { opacity: 0; }
   }
 
   footer {
@@ -191,61 +186,37 @@
   }
 
   footer a { color: var(--copper); }
-
-  .links-row {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-  }
-
-  .links-row a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
-
-  .links-row a:hover { color: var(--copper); }
-
-  .link-sep {
-    color: var(--ink-soft);
-    margin: 0 0.6rem;
-    opacity: 0.5;
-  }
-
-  .stats-row {
-    margin-top: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Ferrous</h1>
-    <div class="underline"></div>
-
     <nav class="site-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="journal.html">Journal</a>
-      <a href="tools.html">Tools</a>
+      <a href="index.html">Home</a>
+      <a href="journal.html" class="active">Journal</a>
       <a href="suggestions.html">Suggestions</a>
       <a href="guestbook.html">Guestbook</a>
+      <a href="https://www.inoreader.com/?add_feed=https://cuferrous.github.io/Ferrous/feed.xml" style="margin-left: auto;" target="_blank" rel="noopener">RSS &rarr;</a>
     </nav>
 
-    <h2 class="section-label">Projects</h2>
-    <div class="index" id="projects-list"></div>
+    <h1>Journal</h1>
+    <div class="underline"></div>
 
-    <div class="oxidized">
-      <p id="typewriter"><span id="typewriter-text"></span><span class="cursor">_</span></p>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="journal" role="tab" aria-selected="true">Journal</button>
+      <button class="tab-btn" data-tab="tutorials" role="tab" aria-selected="false">Tutorials</button>
+      <button class="tab-btn" data-tab="notes" role="tab" aria-selected="false">Notes</button>
     </div>
 
-    <div class="links-row" id="links-row"></div>
+    <div class="panel active" id="panel-journal">
+      <div class="index" id="list-journal"></div>
+    </div>
 
-    <div class="stats-row">
-      <span id="project-count-stat"></span>
+    <div class="panel" id="panel-tutorials">
+      <div class="index" id="list-tutorials"></div>
+    </div>
+
+    <div class="panel" id="panel-notes">
+      <div class="index" id="list-notes"></div>
     </div>
 
     <footer>
@@ -254,62 +225,53 @@
   </div>
 
   <script>
-    async function loadLinks() {
-      try {
-        const res = await fetch('data/links.json?t=' + Date.now());
-        const json = await res.json();
-        const row = document.getElementById('links-row');
-        row.innerHTML = json.entries.map(l =>
-          `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
-        ).join('<span class="link-sep">·</span>');
-        row.classList.add('loaded');
-      } catch (err) {
-        console.error('Could not load links', err);
-      }
-    }
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
 
-    async function loadProjects() {
-      const container = document.getElementById('projects-list');
-      try {
-        const res = await fetch('data/projects.json?t=' + Date.now());
-        const json = await res.json();
-        container.innerHTML = json.entries.map(p => `
-          <a class="entry" href="${p.url}">
-            <div class="entry-row">
-              <span class="entry-name">${p.name}</span>
-              <span class="entry-arrow">View repo</span>
-            </div>
-            <p class="entry-desc">${p.description}</p>
-          </a>
-        `).join('');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    function renderEntries(containerId, entries) {
+      const container = document.getElementById(containerId);
+      if (!entries || entries.length === 0) {
+        container.innerHTML = '<div class="empty">Nothing here yet.</div>';
         container.classList.add('loaded');
-        setProjectCount(json.entries.length);
+        return;
+      }
+      const ordered = [...entries].reverse();
+      container.innerHTML = ordered.map(e => `
+        <a class="entry" href="${e.link || '#'}">
+          <div class="entry-row">
+            <span class="entry-name">${e.title}</span>
+            <span class="entry-date">${e.date}</span>
+          </div>
+          <p class="entry-desc">${e.description}</p>
+        </a>
+      `).join('');
+      container.classList.add('loaded');
+    }
+
+    async function loadData(file, containerId) {
+      try {
+        const res = await fetch(file + '?t=' + Date.now());
+        const json = await res.json();
+        renderEntries(containerId, json.entries);
       } catch (err) {
-        container.innerHTML = '<div class="empty">Could not load projects.</div>';
+        document.getElementById(containerId).innerHTML = '<div class="empty">Couldn\'t load entries.</div>';
       }
     }
 
-    function setProjectCount(count) {
-      document.getElementById('project-count-stat').textContent = count + ' project' + (count === 1 ? '' : 's') + ' tracked';
-    }
-
-    loadLinks();
-    loadProjects();
-
-    function typeWriter(text, elId, speed) {
-      const el = document.getElementById(elId);
-      let i = 0;
-      function step() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          i++;
-          setTimeout(step, speed);
-        }
-      }
-      step();
-    }
-
-    typeWriter('Ferrous by Cuferrous', 'typewriter-text', 45);
+    loadData('data/journal.json', 'list-journal');
+    loadData('data/tutorials.json', 'list-tutorials');
+    loadData('data/notes.json', 'list-notes');
   </script>
 </body>
 </html>
