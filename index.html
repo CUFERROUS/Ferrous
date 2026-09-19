@@ -14,6 +14,7 @@
 <meta name="twitter:title" content="Ferrous">
 <meta name="twitter:description" content="A binder of projects, journal, and tutorials by CUFERROUS.">
 <meta name="twitter:image" content="https://cuferrous.github.io/Ferrous/og-image.png">
+<link rel="canonical" href="https://cuferrous.github.io/Ferrous/">
 <style>
   :root {
     --ink: #F5E9DA;
@@ -46,12 +47,33 @@
     max-width: 640px;
     margin: 0 auto;
     padding: 5rem 1.5rem 4rem;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #projects-list, #links-row {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+
+  #projects-list.loaded, #links-row.loaded {
+    opacity: 1;
   }
 
   .site-nav {
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 3rem 1.2rem 3rem; }
+    h1 { font-size: 2.2rem; }
   }
 
   .site-nav a {
@@ -208,6 +230,7 @@
     <nav class="site-nav">
       <a href="index.html" class="active">Home</a>
       <a href="journal.html">Journal</a>
+      <a href="tools.html">Tools</a>
       <a href="suggestions.html">Suggestions</a>
       <a href="guestbook.html">Guestbook</a>
     </nav>
@@ -239,6 +262,7 @@
         row.innerHTML = json.entries.map(l =>
           `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
         ).join('<span class="link-sep">·</span>');
+        row.classList.add('loaded');
       } catch (err) {
         console.error('Could not load links', err);
       }
@@ -258,6 +282,7 @@
             <p class="entry-desc">${p.description}</p>
           </a>
         `).join('');
+        container.classList.add('loaded');
         setProjectCount(json.entries.length);
       } catch (err) {
         container.innerHTML = '<div class="empty">Could not load projects.</div>';
